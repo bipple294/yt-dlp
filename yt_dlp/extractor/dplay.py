@@ -53,6 +53,8 @@ class DPlayBaseIE(InfoExtractor):
 
     def _update_disco_api_headers(self, headers, disco_base, display_id, realm):
         headers['Authorization'] = self._get_auth(disco_base, display_id, realm, False)
+        headers['x-disco-client'] = f'WEB:UNKNOWN:{self._PRODUCT}:25.2.6'
+        headers['X-disco-params'] = 'realm=go,siteLookupKey=%s,features=ar' % self._PRODUCT
 
     def _download_video_playback_info(self, disco_base, video_id, headers):
         streaming = self._download_json(
